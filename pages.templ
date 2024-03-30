@@ -1,0 +1,40 @@
+package main
+
+templ Index() {
+	@Base("Index") {
+		<h1>Gobin</h1>
+		<p>A crappy version of pastebin, written in go.</p>
+	}
+}
+
+templ New() {
+	@Base("New") {
+		<h1>New submission</h1>
+		<form action="/new" method="post">
+			<textarea class="form-control mb-2" placeholder="Enter the text contents..." name="contents"></textarea>
+			<button type="submit" class="btn btn-primary">Submit</button>
+		</form>
+	}
+}
+
+templ Error(reason string) {
+	@Base("Error!") {
+		<h1>Error!</h1>
+		<p>{ reason }</p>
+	}
+}
+
+templ NewSuccess(uid string) {
+	@Base("Success!") {
+		<h1>Success!</h1>
+		<p>Your text is available in <a href={ templ.URL("/view/" + uid) }>/view/{ uid }</a>.</p>
+	}
+}
+
+templ View(uid string, content string, date string) {
+	@Base("View entry") {
+		<h1>Entry <code>{ uid }</code></h1>
+		<small>Created at { date }</small>
+		<pre>{ content }</pre>
+	}
+}
